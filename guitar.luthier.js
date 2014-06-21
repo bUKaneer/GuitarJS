@@ -79,3 +79,11 @@ Luthier.prototype.applyWebAudioApi = function(element, highlightNotes) {
         }
     }
 };
+Luthier.prototype.paintFrequencyMap = function(element) {
+ 	var notes = element.querySelectorAll('td[data-note-name], th[data-note-name]');		
+ 	
+	for (var n = 0; n < notes.length; n++) {
+		var frequency = notes[n].dataset.frequency;
+		notes[n].style.backgroundColor = 'rgba('+Math.round(frequency / 255)*100+','+Math.round(frequency / 255)*100+','+Math.round(frequency / 255)*100+',0.5)';
+	}
+};
