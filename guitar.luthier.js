@@ -29,42 +29,53 @@ Luthier.prototype.createHtmlTableGuitar = function(element) {
     element.appendChild(table);
 };
 Luthier.prototype.applyWebAudioApi = function(element, highlightNotes) {
-	//Credit to: Middle Ear Media for a great article on oscillators
-	//http://middleearmedia.com/controlling-web-audio-api-oscillators/
-	var context = new webkitAudioContext();
-	var oscillator, gain;
-	var noteElements = element.querySelectorAll('td[data-note-name], th[data-note-name]');
+    //Credit to: Middle Ear Media for a great article on oscillators
+    //http://middleearmedia.com/controlling-web-audio-api-oscillators/
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    var context = new window.AudioContext();
+    var oscillator, gain;
+    var noteElements = element.querySelectorAll('td[data-note-name], th[data-note-name]');
+    for (var n = 0; n < noteElements.length; n++) {
+        noteElements[n].addEventListener('mousedown', start);
+        noteElements[n].addEventListener('mouseup', stop);
+    }
 
-	for (var n =0; n < noteElements.length; n++) {
-		noteElements[n].addEventListener('mousedown',start);
-		noteElements[n].addEventListener('mouseup',stop);
-	}
+    function start(event) {
+        oscillator = context.createOscillator();
+        oscillator.type = 0;
+        var target = event.target || event.srcElement;
+        oscillator.frequency.value = target.dataset.frequency;
+        if (oscillator.noteOn) {
+            oscillator.noteOn(0);
+            gain = context.createGainNode();
+        } else {
+            oscillator.start();
+            gain = context.createGain();
+        }
+        gain.gain.value = 1;
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+        if (highlightNotes) {
+            var sameNotes = document.querySelectorAll('td[data-note-name="' + target.dataset.noteName + '"], th[data-note-name="' + target.dataset.noteName + '"]');
+            for (var n = 0; n < sameNotes.length; n++) {
+                sameNotes[n].classList.add('highlight');
+            }
+        }
+    }
 
-	function start(event){ 
-	    oscillator = context.createOscillator(); 
-	    oscillator.type = 0; 
-	    oscillator.frequency.value = event.srcElement.dataset.frequency; 
-	    oscillator.noteOn(0);
-	    gain = context.createGainNode(); 
-	    gain.gain.value = 1; 
-	    oscillator.connect(gain); 
-	    gain.connect(context.destination); 
-	    if (highlightNotes) {
-	    	var sameNotes = document.querySelectorAll('td[data-note-name="'+event.srcElement.dataset.noteName+'"], th[data-note-name="'+event.srcElement.dataset.noteName+'"]');
-	    	for (var n =0; n < sameNotes.length; n++) { 
-	    		sameNotes[n].classList.add('highlight');
-	    	}
-	    }
- 	}
-
- 	function stop(event) {
-		oscillator.noteOff(0); 
-    	oscillator.disconnect(); 
-	    if (highlightNotes) {
-	    	var sameNotes = document.querySelectorAll('td[data-note-name="'+event.srcElement.dataset.noteName+'"], th[data-note-name="'+event.srcElement.dataset.noteName+'"]');
-	    	for (var n =0; n < sameNotes.length; n++) { 
-	    		sameNotes[n].classList.remove('highlight');
-	    	}
-	    }
-	}	
+    function stop(event) {
+        if (oscillator.noteOff) {
+            oscillator.noteOff(0);
+        } else {
+            oscillator.stop();
+        }
+        oscillator.disconnect();
+        if (highlightNotes) {
+            var target = event.target || event.srcElement;
+            var sameNotes = document.querySelectorAll('td[data-note-name="' + target.dataset.noteName + '"], th[data-note-name="' + target.dataset.noteName + '"]');
+            for (var n = 0; n < sameNotes.length; n++) {
+                sameNotes[n].classList.remove('highlight');
+            }
+        }
+    }
 };
