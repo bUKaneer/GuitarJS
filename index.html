@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+        .highlight {background-color:yellow;}
+        </style>
+    </head>
+    <body>
+        <div id="guitarCase"></div>
+        <script src="/guitar.js" ></script>
+        <script src="/guitar.luthier.js" ></script>
+        <script>
+        var guitar = new Guitar(24,'Standard');
+        var luthier = new Luthier(guitar);
+        luthier.createHtmlTableGuitar(document.getElementById('guitarCase'));
+        luthier.applyWebAudioApi(document.getElementById('guitarCase'),true);
+        </script>
+    </body>
+</html>
