@@ -84,6 +84,6 @@ Luthier.prototype.paintFrequencyMap = function(element) {
  	
 	for (var n = 0; n < notes.length; n++) {
 		var frequency = notes[n].dataset.frequency;
-		notes[n].style.backgroundColor = 'rgba('+Math.round(frequency / 255)*100+','+Math.round(frequency / 255)*100+','+Math.round(frequency / 255)*100+',0.5)';
+		notes[n].style.backgroundColor = 'rgba('+Math.round(frequency / 255)*80+','+Math.round(frequency / 255)*80+','+Math.round(frequency / 20)*80+',0.5)';
 	}
 };
