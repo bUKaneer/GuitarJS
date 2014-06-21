@@ -1,0 +1,26 @@
+
+thead>tr>th {border-bottom: solid 5px black;}
+
+th, td {
+	border-radius:100%;
+	border:solid 1px black;
+	text-align:center;
+	width:50px;
+	height:50px;
+}
+
+th[data-note-name="E"], td[data-note-name="E"] {background-color:#AAAAFF;}
+th[data-note-name="F"], td[data-note-name="F"] {background-color:#AAFFAA;}
+th[data-note-name="F#/Gb"], td[data-note-name="F#/Gb"] {background-color:#EEE;}
+th[data-note-name="G"], td[data-note-name="G"] {background-color:#FFAAAA;}
+th[data-note-name="G#/Ab"], td[data-note-name="G#/Ab"] {background-color:#EEE;}
+th[data-note-name="A"], td[data-note-name="A"] {background-color:#FFFFCF;}
+th[data-note-name="A#/Bb"], td[data-note-name="A#/Bb"] {background-color:#EEE;}
+th[data-note-name="B"], td[data-note-name="B"] {background-color:#AAFFFF;}
+th[data-note-name="C"], td[data-note-name="C"] {background-color:#FFFFFF;}
+th[data-note-name="C#/Db"], td[data-note-name="C#/Db"] {background-color:#EEE;}
+th[data-note-name="D"], td[data-note-name="D"] {background-color:#FFAAFF;}
+th[data-note-name="D#/Eb"], td[data-note-name="D#/Eb"] {background-color:#EEE;}
+
+#guitarCase {font-size: 1rem;font-family:arial;}
+#guitarCase th.highlight,#guitarCase td.highlight {background-color:yellow;border:solid 1px red;}
