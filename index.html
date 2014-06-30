@@ -4,16 +4,32 @@
         <link rel="stylesheet" href="/guitar.luthier.htmlTable.css" />
     </head>
     <body>
-        <div id="guitarCase"></div>
+        <h1>GuitarJS Demo</h1>
+
+        <div id="luthierControlPanel">
+            <section id="luthierColourisationOptionContainer">
+                <h2>Note Finder</h2>
+                <p>Turns note colours on and off.</p>
+            </section>
+            <section id="luthierChordTable">
+                <h2>Chord Finder</h2>
+                <p>Hover over the chord to show it on the fretboard.</p>
+            </section>
+        </div>
+        <div id="guitarCase">
+            <h2>Fretboard</h2>
+            <p>6 string, 24 fret Guitar in Standard Tuning.</p>
+        </div>
         <script src="/guitar.js" ></script>
+        <script src="/guitar.chord.json.js" ></script>
         <script src="/guitar.luthier.js" ></script>
         <script>
         var guitar = new Guitar(24,'Standard');
         var luthier = new Luthier(guitar);
         luthier.createHtmlTableGuitar(document.getElementById('guitarCase'));
-        luthier.applyWebAudioApi(document.getElementById('guitarCase'),true);
-        //Uncomment the line below to show frequency map colourisation.
-        //luthier.paintFrequencyMap(document.getElementById('guitarCase'),true);
+        luthier.addHtmlTableWebAudioApiNotePlay(document.getElementById('guitarCase'),true);
+        luthier.createChordTable(document.getElementById('guitarCase'), document.getElementById('luthierChordTable'));
+        luthier.createColourisationOptions(document.getElementById('guitarCase'), document.getElementById('luthierColourisationOptionContainer'));
         </script>
     </body>
 </html>

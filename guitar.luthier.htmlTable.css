@@ -1,26 +1,30 @@
+body { font-family:arial; }
 
-thead>tr>th {border-bottom: solid 5px black;}
+#luthierControlPanel {float:left;background-color:#EDEDED;padding:10px;margin:0 10px 10px 0;}
+#luthierChordDropDown {}
+#luthierChordTable td, #luthierChordTable th {	width:184px; }
+#luthierColourisationOptionContainer {}
+#luthierChordTable table {width:100%;}
+#luthierChordTable table tr:hover {background-color: #E0E0E0;}		
+#luthierChordTable table td {text-align: center;}
+#luthierChordTable code {font-size:125%;font-weight: 900;}
 
-th, td {
-	border-radius:100%;
-	border:solid 1px black;
-	text-align:center;
-	width:50px;
-	height:50px;
-}
+#guitarCase {float:left;background-color:#EDEDED;padding:10px;margin:0 10px 10px 0;}
+#guitarCase thead>tr>th {border-bottom: solid 5px black;}
+#guitarCase th, #guitarCase td { border-radius:100%;border:solid 1px black;text-align:center;width:50px;height:50px; }
+#guitarCase th[data-note-name="C"], #guitarCase td[data-note-name="C"] {background-color:#FF9999;}
+#guitarCase th[data-note-name="C#/Db"], #guitarCase td[data-note-name="C#/Db"] {background-color:#FFB799;}
+#guitarCase th[data-note-name="D"], #guitarCase td[data-note-name="D"] {background-color:#D8B182;}
+#guitarCase th[data-note-name="D#/Eb"], #guitarCase td[data-note-name="D#/Eb"] {background-color:#FFEA99;}
+#guitarCase th[data-note-name="E"], #guitarCase td[data-note-name="E"] {background-color:#E7EA8C;}
+#guitarCase th[data-note-name="F"], #guitarCase td[data-note-name="F"] {background-color:#B3D680;}
+#guitarCase th[data-note-name="F#/Gb"], #guitarCase td[data-note-name="F#/Gb"] {background-color:#99FFE0;}
+#guitarCase th[data-note-name="G"], #guitarCase td[data-note-name="G"] {background-color:#99FFF6;}
+#guitarCase th[data-note-name="G#/Ab"], #guitarCase td[data-note-name="G#/Ab"] {background-color:#99E3FF;}
+#guitarCase th[data-note-name="A"], #guitarCase td[data-note-name="A"] {background-color:#B099FF;}
+#guitarCase th[data-note-name="A#/Bb"], #guitarCase td[data-note-name="A#/Bb"] {background-color:#DB99FF;}
+#guitarCase th[data-note-name="B"], #guitarCase td[data-note-name="B"] {background-color:#FF99FF;}
 
-th[data-note-name="E"], td[data-note-name="E"] {background-color:#AAAAFF;}
-th[data-note-name="F"], td[data-note-name="F"] {background-color:#AAFFAA;}
-th[data-note-name="F#/Gb"], td[data-note-name="F#/Gb"] {background-color:#EEE;}
-th[data-note-name="G"], td[data-note-name="G"] {background-color:#FFAAAA;}
-th[data-note-name="G#/Ab"], td[data-note-name="G#/Ab"] {background-color:#EEE;}
-th[data-note-name="A"], td[data-note-name="A"] {background-color:#FFFFCF;}
-th[data-note-name="A#/Bb"], td[data-note-name="A#/Bb"] {background-color:#EEE;}
-th[data-note-name="B"], td[data-note-name="B"] {background-color:#AAFFFF;}
-th[data-note-name="C"], td[data-note-name="C"] {background-color:#FFFFFF;}
-th[data-note-name="C#/Db"], td[data-note-name="C#/Db"] {background-color:#EEE;}
-th[data-note-name="D"], td[data-note-name="D"] {background-color:#FFAAFF;}
-th[data-note-name="D#/Eb"], td[data-note-name="D#/Eb"] {background-color:#EEE;}
-
-#guitarCase {font-size: 1rem;font-family:arial;}
 #guitarCase th.highlight,#guitarCase td.highlight {background-color:yellow;border:solid 1px red;}
+
+.luthier-selectedChord  {outline:solid 4px green;}

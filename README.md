@@ -21,3 +21,5 @@ Partial support in IE11, guitar.js is fine, luthier will draw but there is no We
 
 Not Supported at all in IE<11
 
+Note colourisation was taken from "Note Colours" article here 
+http://pondscienceinstitute.on-rev.com/svpwiki/tiki-index.php?page=music+note+or+sound+colors
