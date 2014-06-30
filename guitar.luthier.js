@@ -1,6 +1,12 @@
 function Luthier(guitar) {
     this.guitar = guitar;
 }
+Luthier.prototype.addNoteOctaveNumber = function(element, note) {
+    var sub = document.createElement("sub");
+    var subContent = document.createTextNode(note.getNoteOctave());
+    sub.appendChild(subContent);
+    element.appendChild(sub);
+}
 Luthier.prototype.createHtmlTableGuitar = function(element) {
     var head = document.createElement('thead');
     var body = document.createElement('tbody');
@@ -11,6 +17,7 @@ Luthier.prototype.createHtmlTableGuitar = function(element) {
             var note = guitar.findNote(this.guitar.Strings[s], this.guitar.Frets[f]);
             var cellContent = document.createTextNode(note.getNoteName());
             cell.appendChild(cellContent);
+            if (this.guitar.tuning == "Standard") { this.addNoteOctaveNumber(cell,note); }
             cell.dataset.noteName = note.getNoteName();
             cell.dataset.frequency = note.getFrequency();
             cell.dataset.string = this.guitar.Strings[s].number;

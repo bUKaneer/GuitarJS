@@ -22,10 +22,42 @@ Note.prototype.getNoteName = function() {
     return noteNames[fretOffset + stringOffset];
 };
 
-function String(name, number, openNoteFrequency) {
+Note.prototype.getNoteOctave = function() {
+    
+    var offset = 0;
+    switch(this.guitar.tuning) 
+    {
+        case 'Standard':
+            offset = getStandardTuningStringOffsetValue(this.string.number);
+            break;        
+        //TODO: Add other tuning octave offset calcs
+        default:
+            return '';
+    }
+
+    if (this.fret.position < offset) { return this.string.openNoteOctave; }
+    if (this.fret.position >= (offset + 11)) { return this.string.openNoteOctave + 2; }
+    return this.string.openNoteOctave + 1;
+
+    function getStandardTuningStringOffsetValue(stringNumber) {
+        switch(stringNumber) 
+        {
+            case 6 : return 8;
+            case 5 : return 3;
+            case 4 : return 10;
+            case 3 : return 5;
+            case 2 : return 1;
+            case 1 : return 8;
+            default: return 0;
+        }
+    }
+};
+
+function String(name, number, openNoteFrequency, openNoteOctave) {
     this.name = name;
     this.number = number;
     this.openNoteFrequency = openNoteFrequency;
+    this.openNoteOctave = openNoteOctave;
 }
 
 function Fret(position) {
@@ -56,12 +88,12 @@ function Guitar(numberOfFrets, tuning) {
     }
 
     function dropDStringInit(guitar) {
-        guitar.Strings.push(new String('D', 6, 146.8));
-        guitar.Strings.push(new String('A', 5, 110));
-        guitar.Strings.push(new String('D', 4, 146.8));
-        guitar.Strings.push(new String('G', 3, 196));
-        guitar.Strings.push(new String('B', 2, 246.9));
-        guitar.Strings.push(new String('E', 1, 329.6));
+        guitar.Strings.push(new String('D', 6, 146.8, 3));
+        guitar.Strings.push(new String('A', 5, 110, 2));
+        guitar.Strings.push(new String('D', 4, 146.8, 3));
+        guitar.Strings.push(new String('G', 3, 196, 3));
+        guitar.Strings.push(new String('B', 2, 246.9, 3));
+        guitar.Strings.push(new String('E', 1, 329.6, 4));
     }
 
     function standardTuningInit(guitar) {
@@ -71,12 +103,12 @@ function Guitar(numberOfFrets, tuning) {
     }
 
     function standardStringInit(guitar) {
-        guitar.Strings.push(new String('E', 6, 82.4));
-        guitar.Strings.push(new String('A', 5, 110));
-        guitar.Strings.push(new String('D', 4, 146.8));
-        guitar.Strings.push(new String('G', 3, 196));
-        guitar.Strings.push(new String('B', 2, 246.9));
-        guitar.Strings.push(new String('E', 1, 329.6));
+        guitar.Strings.push(new String('E', 6, 82.4, 2));
+        guitar.Strings.push(new String('A', 5, 110, 2));
+        guitar.Strings.push(new String('D', 4, 146.8, 3));
+        guitar.Strings.push(new String('G', 3, 196, 3));
+        guitar.Strings.push(new String('B', 2, 246.9, 3));
+        guitar.Strings.push(new String('E', 1, 329.6, 4));
     }
 
     function standardFretInit(guitar) {
