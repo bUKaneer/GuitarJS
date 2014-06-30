@@ -36,7 +36,8 @@ function Guitar(numberOfFrets, tuning) {
     this.Strings = new Array();
     this.Frets = new Array();
     this.Notes = new Array();
-    console.log(tuning);
+    this.tuning = tuning;
+    
     switch (tuning) {
         case 'Standard':
             standardTuningInit(this);
@@ -79,6 +80,8 @@ function Guitar(numberOfFrets, tuning) {
     }
 
     function standardFretInit(guitar) {
+        if (numberOfFrets < 0) {numberOfFrets = 21;}
+        if (numberOfFrets > 24) {numberOfFrets = 24;}
         for (var f = 0; f < numberOfFrets; f++) {
             guitar.Frets.push(new Fret(f));
         }
