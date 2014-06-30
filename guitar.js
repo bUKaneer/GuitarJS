@@ -36,12 +36,31 @@ function Guitar(numberOfFrets, tuning) {
     this.Strings = new Array();
     this.Frets = new Array();
     this.Notes = new Array();
+    console.log(tuning);
     switch (tuning) {
         case 'Standard':
             standardTuningInit(this);
             break;
+        case 'DropD':
+            dropDTuningInit(this);
+            break;
         default:
-            throw new UserException('Invalid Tuning: Try "Standard"');
+            throw 'Invalid Tuning: Try "Standard or DropD"';
+    }
+
+    function dropDTuningInit(guitar) {
+        dropDStringInit(guitar);
+        standardFretInit(guitar);
+        standardNoteInit(guitar);
+    }
+
+    function dropDStringInit(guitar) {
+        guitar.Strings.push(new String('D', 6, 146.8));
+        guitar.Strings.push(new String('A', 5, 110));
+        guitar.Strings.push(new String('D', 4, 146.8));
+        guitar.Strings.push(new String('G', 3, 196));
+        guitar.Strings.push(new String('B', 2, 246.9));
+        guitar.Strings.push(new String('E', 1, 329.6));
     }
 
     function standardTuningInit(guitar) {
@@ -84,5 +103,5 @@ Guitar.prototype.findNote = function(string, fret) {
     		return this.Notes[n];
     	}
     }
-    throw UserException('Note not found!');
+    throw 'Note not found!';
 };
