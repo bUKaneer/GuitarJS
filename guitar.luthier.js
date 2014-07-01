@@ -1,12 +1,6 @@
 function Luthier(guitar) {
     this.guitar = guitar;
 }
-Luthier.prototype.addNoteOctaveNumber = function(element, note) {
-    var sub = document.createElement("sub");
-    var subContent = document.createTextNode(note.getNoteOctave());
-    sub.appendChild(subContent);
-    element.appendChild(sub);
-}
 Luthier.prototype.createHtmlTableGuitar = function(element) {
     var head = document.createElement('thead');
     var body = document.createElement('tbody');
@@ -17,7 +11,17 @@ Luthier.prototype.createHtmlTableGuitar = function(element) {
             var note = guitar.findNote(this.guitar.Strings[s], this.guitar.Frets[f]);
             var cellContent = document.createTextNode(note.getNoteName());
             cell.appendChild(cellContent);
-            if (this.guitar.tuning == "Standard") { this.addNoteOctaveNumber(cell,note); }
+
+            element.dataset.hasOctaveNumbers = false;
+            if (this.guitar.tuning == "Standard") 
+            { 
+                element.dataset.hasOctaveNumbers = true;
+                cell.dataset.octaveNumber = note.getNoteOctave();
+                var sub = document.createElement("sub");
+                var subContent = document.createTextNode(cell.dataset.octaveNumber);
+                sub.appendChild(subContent);
+                cell.appendChild(sub);
+            }
             cell.dataset.noteName = note.getNoteName();
             cell.dataset.frequency = note.getFrequency();
             cell.dataset.string = this.guitar.Strings[s].number;
@@ -83,13 +87,6 @@ Luthier.prototype.addHtmlTableWebAudioApiNotePlay = function(element, highlightN
         }
     }
 };
-Luthier.prototype.paintFrequencyMap = function(element) {
-    var notes = element.querySelectorAll('td[data-note-name], th[data-note-name]');
-    for (var n = 0; n < notes.length; n++) {
-        var frequency = notes[n].dataset.frequency;
-        notes[n].style.backgroundColor = 'rgba(' + Math.round(frequency / 255) * 80 + ',' + Math.round(frequency / 255) * 80 + ',' + Math.round(frequency / 20) * 80 + ',0.5)';
-    }
-};
 Luthier.prototype.highlightChord = function(guitarElement, pattern) {
     var patArray = pattern.split(' ');
     var previousNotes = guitarElement.querySelectorAll('.luthier-selectedChord');
@@ -105,17 +102,46 @@ Luthier.prototype.highlightChord = function(guitarElement, pattern) {
         }
     }
 };
-Luthier.prototype.createColourisationOptions = function(guitarElement, panelElement) {
+
+Luthier.prototype.createOctaveColourisationOptions = function(guitarElement, panelElement) {
+    if (!guitarElement.dataset.hasOctaveNumbers) return;
+
+
+    var p = document.createElement('p');
+    p.appendChild(document.createTextNode("Toggle octave colourisation."));
+    panelElement.appendChild(p);
+    var checkbox = document.createElement('input');
+    checkbox.checked = false;    
+    checkbox.id = 'luthier-octave-colourisation';
+    checkbox.type = 'checkbox';
+    checkbox.GuitarElement = guitarElement;
+    var label = document.createElement('label');
+    label.htmlFor = 'luthier-octave-colourisation';
+    label.appendChild(document.createTextNode('Checking this box will show octave map.'));
+    checkbox.addEventListener('click', colourise);
+    panelElement.appendChild(checkbox);
+    panelElement.appendChild(label);
+
+    function colourise(event) {
+        if (!event.target.checked) {
+            event.target.GuitarElement.classList.remove('octave-colorisation-active');
+        } else {
+            event.target.GuitarElement.classList.add('octave-colorisation-active');
+        }
+    }
+}
+
+Luthier.prototype.createNoteColourisationOptions = function(guitarElement, panelElement) {
     var notes = new Array('C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B');
     for (var n = 0; n < notes.length; n++) {
         var checkbox = document.createElement('input');
         checkbox.checked = true;
-        checkbox.id = notes[n].replace('#', 'sharp');
+        checkbox.id = 'luthier-note-colourisation-' + notes[n].replace('#', 'sharp');
         checkbox.type = 'checkbox';
         checkbox.dataset.noteName = notes[n];
         checkbox.GuitarElement = guitarElement;
         var label = document.createElement('label');
-        label.htmlFor = notes[n].replace('#', 'sharp');
+        label.htmlFor = 'luthier-note-colourisation-' + notes[n].replace('#', 'sharp');
         label.appendChild(document.createTextNode(notes[n]));
         panelElement.appendChild(checkbox);
         panelElement.appendChild(label);

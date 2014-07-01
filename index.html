@@ -7,14 +7,14 @@
         <h1>GuitarJS Demo</h1>
 
         <div id="luthierControlPanel">
-            <section id="luthierColourisationOptionContainer">
+            <div id="luthierColourisationOptionContainer">
                 <h2>Note Finder</h2>
-                <p>Turns note colours on and off.</p>
-            </section>
-            <section id="luthierChordTable">
+                <p>Toggle note colourisation.</p>
+            </div>
+            <div id="luthierChordTable">
                 <h2>Chord Finder</h2>
                 <p>Hover over the chord to show it on the fretboard.</p>
-            </section>
+            </div>
         </div>
         <div id="guitarCase">
             <h2>Fretboard</h2>
@@ -29,7 +29,8 @@
         luthier.createHtmlTableGuitar(document.getElementById('guitarCase'));
         luthier.addHtmlTableWebAudioApiNotePlay(document.getElementById('guitarCase'),true);
         luthier.createChordTable(document.getElementById('guitarCase'), document.getElementById('luthierChordTable'));
-        luthier.createColourisationOptions(document.getElementById('guitarCase'), document.getElementById('luthierColourisationOptionContainer'));
+        luthier.createNoteColourisationOptions(document.getElementById('guitarCase'), document.getElementById('luthierColourisationOptionContainer'));
+        luthier.createOctaveColourisationOptions(document.getElementById('guitarCase'), document.getElementById('luthierColourisationOptionContainer'));
         </script>
     </body>
 </html>

@@ -28,3 +28,25 @@ body { font-family:arial; }
 #guitarCase th.highlight,#guitarCase td.highlight {background-color:yellow;border:solid 1px red;}
 
 .luthier-selectedChord  {outline:solid 4px green;}
+
+
+
+#guitarCase.octave-colorisation-active th[data-octave-number="2"],
+  #guitarCase.octave-colorisation-active td[data-octave-number="2"]
+  {background-color:#70FFFF;}
+
+#guitarCase.octave-colorisation-active th[data-octave-number="3"],
+  #guitarCase.octave-colorisation-active td[data-octave-number="3"]
+  {background-color:#90FF90;}
+
+#guitarCase.octave-colorisation-active th[data-octave-number="4"],
+  #guitarCase.octave-colorisation-active td[data-octave-number="4"]
+  {background-color:#FFB0B0;}
+
+#guitarCase.octave-colorisation-active th[data-octave-number="5"],
+  #guitarCase.octave-colorisation-active td[data-octave-number="5"]
+  {background-color:#FFFFD0;}
+
+#guitarCase.octave-colorisation-active th[data-octave-number="6"],
+  #guitarCase.octave-colorisation-active td[data-octave-number="6"]
+  {background-color:#FFF0FF;}
