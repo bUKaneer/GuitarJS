@@ -29,8 +29,6 @@ body { font-family:arial; }
 
 .luthier-selectedChord  {outline:solid 4px green;}
 
-
-
 #guitarCase.octave-colorisation-active th[data-octave-number="2"],
   #guitarCase.octave-colorisation-active td[data-octave-number="2"]
   {background-color:#70FFFF;}
@@ -50,3 +48,4 @@ body { font-family:arial; }
 #guitarCase.octave-colorisation-active th[data-octave-number="6"],
   #guitarCase.octave-colorisation-active td[data-octave-number="6"]
   {background-color:#FFF0FF;}
+  
